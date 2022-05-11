@@ -4,10 +4,27 @@ import sys
 import time
 
 
-# é
+# éñí
 
 
-def practice_he_estado(action="random"):
+def shuffle(func):
+    whos_indices = ['a']
+    def inner(whos, whats, wheres, whens):
+        whos_indices = list(range(0, len(whos)))
+        random.shuffle(whos_indices)
+
+        return func(whos, whats, wheres, whens)
+
+    return inner
+
+
+@shuffle
+def cycle_sentences(whos, whats, wheres, whens):
+    #???? print(f"{whos_indices}")
+    return
+
+
+def practice_all(group="yes", randomize="no"):
     """
     bueno, yo he estado descansando en casa esta mañana,
     estaba caminando en el parque ayer
@@ -109,25 +126,34 @@ def practice_he_estado(action="random"):
 
     os.system("clear")
 
-    if action == "static":
+    if group == "yes":
         while True:
+            if randomize == "yes":
+                s = random.randrange(0, len(subject))
+            else:
+                s = 0
+
+            #???? placeholder
+            i = 0
+
             os.system("clear")
             input("GET READY... GET SET...\n")
             os.system("clear")
             start = time.time()
-            for i in range(0, 1):
-                print(f"WELL, {subject[i][0]} {he_estar[i][0]} {verb_ando[i][0]} {place[i][0]} {today_when[i][0]}")
-                print(f"{hide_pronoun[i][0]}{past_estar[i][0]} {verb_ando[i+1][0]} {place[i+1][0]} {past_when[i][0]}")
-                print(f"BUT {today_when[i+1][0]} {hide_pronoun[i][0]}{now_estar[i][0]} {verb_ando[i+2][0]} {amount[i][0]} {place[i+2][0]}")
-                print(f"AND {future_when[i][0]} {hide_pronoun[i][0]}{future_estar[i][0]} {verb_ando[i+3][0]} {place[i+3][0]} IN THE CITY")
+            print(f"WELL, {subject[s][0]} {he_estar[s][0]} {verb_ando[i][0]} {place[i][0]} {today_when[i][0]}")
+            print(f"{hide_pronoun[s][0]}{past_estar[s][0]} {verb_ando[i+1][0]} {place[i+1][0]} {past_when[i][0]}")
+            print(f"BUT {today_when[i+1][0]} {hide_pronoun[s][0]}{now_estar[s][0]} {verb_ando[i+2][0]} {amount[i][0]} {place[i+2][0]}")
+            print(f"AND {future_when[i][0]} {hide_pronoun[s][0]}{future_estar[s][0]} {verb_ando[i+3][0]} {place[i+3][0]} IN THE CITY")
+
             input("")
             end = time.time()
             print(f"COMPLETE IN {int(end - start)} SECONDS\n")
-            for i in range(0, 1):
-                print(f"bueno, {subject[i][1]} {he_estar[i][1]} estado {verb_ando[i][1]}{verb_ando[i][3]} {place[i][1]} {today_when[i][1]}")
-                print(f"{hide_pronoun[i][1]}{past_estar[i][1]} {verb_ando[i+1][1]}{verb_ando[i+1][3]} {place[i+1][1]} {past_when[i][1]}")
-                print(f"pero {today_when[i+1][1]} {hide_pronoun[i][1]}{now_estar[i][1]} {verb_ando[i+2][1]} {amount[i][1]}{verb_ando[i+2][3]} {place[i+2][1]}")
-                print(f"y {future_when[i][1]} {hide_pronoun[i][1]}{future_estar[i][1]} {verb_ando[i+3][1]} {place[i+3][1]} en la ciudad")
+
+            print(f"bueno, {subject[s][1]} {he_estar[s][1]} estado {verb_ando[i][1]}{verb_ando[i][3]} {place[i][1]} {today_when[i][1]}")
+            print(f"{hide_pronoun[s][1]}{past_estar[s][1]} {verb_ando[i+1][1]}{verb_ando[i+1][3]} {place[i+1][1]} {past_when[i][1]}")
+            print(f"pero {today_when[i+1][1]} {hide_pronoun[s][1]}{now_estar[s][1]} {verb_ando[i+2][1]} {amount[i][1]}{verb_ando[i+2][3]} {place[i+2][1]}")
+            print(f"y {future_when[i][1]} {hide_pronoun[s][1]}{future_estar[s][1]} {verb_ando[i+3][1]} {place[i+3][1]} en la ciudad")
+
             input("")
 
 
@@ -420,18 +446,56 @@ def practice(name):
     elif name == "static-estare":
         while True:
             practice_estare(action="static")
-    elif name == "he-estado":
+    elif name == "all":
         while True:
-            practice_he_estado(action="static")
+            practice_all(action="static")
     else:
         raise Exception(f"Unknown practice '{name}'")
 
 
 def main(argv):
+    categories = [
+        "all",
+        "estoy",
+        "estaba",
+        "estaré",
+        "he",
+    ]
     if len(argv) < 2:
-        raise Exception("Please specify a practice: estoy")
+        category = input(f"Category {categories}: ")
+        if category == "":
+            category = categories[0]
+    else:
+        category = argv[1]
+    assert category in categories
 
-    practice(argv[1])
+    groups = [
+        "yes",
+        "no",
+    ]
+    if len(argv) < 3:
+        group = input(f"Show full group {groups}: ")
+        if group == "":
+            group = groups[0]
+    else:
+        group = argv[2]
+    assert group in groups
+
+    randomizes = [
+        "yes",
+        "no",
+    ]
+    if len(argv) < 3:
+        randomize = input(f"Randomize {randomizes}: ")
+        if randomize == "":
+            randomize = randomizes[0]
+    else:
+        randomize = argv[2]
+    assert randomize in randomizes
+
+    print(f"category={category} group={group} randomize={randomize}")
+    input("")
+    globals()[f"practice_{category}"](group=group, randomize=randomize)
 
     return 0
 
