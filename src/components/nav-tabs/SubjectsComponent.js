@@ -13,6 +13,11 @@ class Subject {
 export const Subjects = [
     new Subject("yo", "i"),
     new Subject("tu", "you"),
+    new Subject("el", "he"),
+    new Subject("ella", "she"),
+    new Subject("nosotros", "we"),
+    new Subject("vosotros", "y'all"),
+    new Subject("ellos", "they"),
 ];
 
 export var CurrentSubjects;
