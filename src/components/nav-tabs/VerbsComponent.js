@@ -5,7 +5,6 @@ import { useState, useEffect, Component } from 'react';
 
 class Verb {
     constructor(spanish, english) {
-        this.value = spanish;
         this.spanish = spanish;
         this.english = english;
     }
@@ -14,10 +13,10 @@ class Verb {
         if (this.spanish.endsWith("ar")) {
             switch(who) {
             case "yo":
-                return`${this.spanish.substring(0, this.spanish.length - 3)}o`;
+                return`${this.spanish.substring(0, this.spanish.length - 2)}o`;
                 break;
             case "tu":
-                return `${this.spanish.substring(0, this.spanish.length - 3)}as`;
+                return `${this.spanish.substring(0, this.spanish.length - 2)}as`;
                 break;
             default:
                 return `unknown 'o' who: ${who}`;
@@ -25,10 +24,10 @@ class Verb {
         } else if (this.spanish.endsWith("er") || this.spanish.endsWith("er")) {
             switch(who) {
             case "yo":
-                return`${this.spanish.substring(0, this.spanish.length - 3)}o`;
+                return`${this.spanish.substring(0, this.spanish.length - 2)}o`;
                 break;
             case "tu":
-                return `${this.spanish.substring(0, this.spanish.length - 3)}as`;
+                return `${this.spanish.substring(0, this.spanish.length - 2)}as`;
                 break;
             default:
                 return `unknown 'o' who: ${who}`;
@@ -39,8 +38,8 @@ class Verb {
     }
 }
 
-const Verbs = [
-    new Verb("caminiar", "walk"),
+export const Verbs = [
+    new Verb("caminar", "walk"),
     new Verb("trabajar", "work"),
     new Verb("esperar", "wait"),
 ];
