@@ -1,9 +1,11 @@
-import { Container, Text, Title, Button } from '@mantine/core';
+import { Container, Text, Title, Button, Spoiler } from '@mantine/core';
 import React from 'react';
 import { useState } from 'react';
 import { ConjugationsContent, CurrentConjugations, Conjugations } from './ConjugationsComponent.js'
 import { VerbsContent, CurrentVerbs, Verbs, Verb } from './VerbsComponent.js'
 import { SubjectsContent, CurrentSubjects, Subjects, Subject } from './SubjectsComponent.js'
+import { WheresContent, CurrentWheres, Wheres, EmptyWhere, Where } from './WheresComponent.js'
+import { WhensContent, CurrentWhens, Whens, EmptyWhen, When } from './WhensComponent.js'
 
 
 export function AboutContent() {
@@ -11,6 +13,8 @@ export function AboutContent() {
     const [currentConjugation, setCurrentConjugation] = useState({});
     const [currentVerb, setCurrentVerb] = useState(Verb);
     const [currentSubject, setCurrentSubject] = useState(Subject);
+    const [currentWhere, setCurrentWhere] = useState(Where);
+    const [currentWhen, setCurrentWhen] = useState(When);
     const updateSentence = () => {
         let conjugationName = CurrentConjugations[Math.floor(Math.random() * CurrentConjugations.length)];
         let conjugation = Conjugations.find(c => c.value === conjugationName);
@@ -22,31 +26,51 @@ export function AboutContent() {
         let subject = Subjects.find(s => s.spanish === subjectName);
         setCurrentSubject(subject);
 
-        let result = ["unset", "unset"];
+        let where;
+        if (CurrentWheres.length == 0) {
+            where = EmptyWhere;
+        } else {
+            let whereName = CurrentWheres[Math.floor(Math.random() * CurrentWheres.length)];
+            where = Wheres.find(v => v.spanish === whereName);
+        }
+        setCurrentWhere(where);
+
+        let when;
+        if (CurrentWhens.length == 0) {
+            when = EmptyWhen;
+        } else {
+            let whenName = CurrentWhens[Math.floor(Math.random() * CurrentWhens.length)];
+            when = Whens.find(v => v.spanish === whenName);
+        }
+        setCurrentWhen(when);
+
+        let sentencePair = ["unset", "unset"];
         console.log(`${conjugation.value} ${subject.spanish} ${verb.spanish}`);
         switch(conjugation.value) {
         case "o":
-            result = verb.o(subject.spanish);
+            sentencePair = verb.o(subject.spanish);
             break;
         case "estoy_ando":
-            result = verb.estoy_ando(subject.spanish);
+            sentencePair = verb.estoy_ando(subject.spanish);
             break;
         case "he_estaba_ando":
-            result = verb.he_estaba_ando(subject.spanish);
+            sentencePair = verb.he_estaba_ando(subject.spanish);
             break;
         case "estaba_ando":
-            result = verb.estaba_ando(subject.spanish);
+            sentencePair = verb.estaba_ando(subject.spanish);
             break;
         case "estare_ando":
-            result = verb.estare_ando(subject.spanish);
+            sentencePair = verb.estare_ando(subject.spanish);
             break;
         default:
-            result = [
+            sentencePair = [
                 `unrecognized conjugation: ${conjugation.value}`,
                 `unrecognized conjugation: ${conjugation.value}`,
             ];
         }
-        setSentence(result);
+        sentencePair[0] = `${sentencePair[0]} ${where.spanish} ${when.spanish}`;
+        sentencePair[1] = `${sentencePair[1]} ${where.english} ${when.english}`;
+        setSentence(sentencePair);
     };
 
 
@@ -56,13 +80,28 @@ export function AboutContent() {
             <ConjugationsContent />
             <SubjectsContent />
             <VerbsContent />
+            <WheresContent />
+            <WhensContent />
             <Button
                 onClick={updateSentence}>
                 Next Sentence
             </Button>
-            <Text>{sentence[1]}</Text>
-            <Text>{sentence[0]}</Text>
-
+            <Text
+                size="xl"
+            >
+                {sentence[1]}
+            </Text>
+            <Spoiler
+                maxHeight={5}
+                showLabel="Show Spanish"
+                hideLabel="Hide Spanish"
+            >
+            <Text
+                size="xl"
+            >
+                {sentence[0]}
+            </Text>
+            </Spoiler>
         </Container>
     )
 }

@@ -3,44 +3,39 @@ import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-class Subject {
+class Where {
     constructor(spanish, english) {
         this.spanish = spanish;
         this.english = english;
     }
 }
 
-export const Subjects = [
-    new Subject("yo", "i"),
-    new Subject("tu", "you"),
-    new Subject("el", "he"),
-    new Subject("ella", "she"),
-    new Subject("nosotros", "we"),
-    new Subject("vosotros", "y'all"),
-    new Subject("ellos", "they"),
+export const Wheres = [
+    new Where("en casa", "at home"),
 ];
 
-export var CurrentSubjects;
+export const EmptyWhere = new Where("", "");
 
-export function SubjectsContent() {
+export var CurrentWheres;
+
+export function WheresContent() {
     const [value, setValue] = useState([]);
 
     useEffect(() => {
-        console.log(`???? subjects=${value}`);
-        CurrentSubjects = value;
+        CurrentWheres = value;
     }, [value]);
 
     return (
         <Container>
             <MultiSelect
-                data={Subjects.map(v => {
+                data={Wheres.map(v => {
                     return {
                         label: v.english,
-                        value: v.spanish,
+                        value: v.spanish
                     }
                 })}
-                label="Whos"
-                placeholder="Pick subjects to use in sentences"
+                label="Wheres"
+                placeholder="Pick locations to use in sentences"
                 value={value}
                 onChange={setValue}
                 clearable
