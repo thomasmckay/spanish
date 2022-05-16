@@ -3,7 +3,10 @@ import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-class Subject {
+export class Subject {
+    spanish: string;
+    english: string;
+
     constructor(spanish, english) {
         this.spanish = spanish;
         this.english = english;
