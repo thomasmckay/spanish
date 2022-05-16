@@ -595,9 +595,14 @@ export function VerbsContent() {
     return (
         <Container>
             <MultiSelect
-                data={Verbs.map(v => v.spanish)}
-                label="Verbs"
-                placeholder="Pick all that you like"
+                data={Verbs.map(v => {
+                    return {
+                        label: v.english,
+                        value: v.spanish,
+                    }
+                })}
+                label="Whats"
+                placeholder="Pick verbs to use in sentences"
                 value={value}
                 onChange={setValue}
                 clearable
