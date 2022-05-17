@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Container, Group, ActionIcon } from '@mantine/core';
 import { BrandGithub } from 'tabler-icons-react';
-import { ColorSchemeToggle } from '../ColorSchemeToggle';
+import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 
 export function Nav() {

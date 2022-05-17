@@ -3,7 +3,20 @@ import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+class XYZ {
+    name: string;
+
+    constructor() {
+        this.name = "abc";
+    }
+}
+
+
 class Verb {
+    spanish: string;
+    english: string;
+    props: any;
+
     constructor(spanish, english, props={}) {
         this.spanish = spanish;
         this.english = english;

@@ -1,20 +1,26 @@
-import { Container, Text, Title, Button, Spoiler } from '@mantine/core';
 import React from 'react';
-import { useState } from 'react';
-import { ConjugationsContent, CurrentConjugations, Conjugations } from './ConjugationsComponent.js'
-import { VerbsContent, CurrentVerbs, Verbs, Verb } from './VerbsComponent.js'
-import { SubjectsContent, CurrentSubjects, Subjects, Subject } from './SubjectsComponent.js'
-import { WheresContent, CurrentWheres, Wheres, EmptyWhere, Where } from './WheresComponent.js'
-import { WhensContent, CurrentWhens, Whens, EmptyWhen, When } from './WhensComponent.js'
+import { useRef, useState } from 'react';
+
+import { Accordion, Button, Center, Container, Divider, Text, Title } from '@mantine/core';
+import { useAccordionState } from '@mantine/core';
+import { useHotkeys } from '@mantine/hooks';
+
+import { ConjugationsContent, CurrentConjugations, Conjugations } from '../ConjugationsComponent'
+import { VerbsContent, CurrentVerbs, Verbs, Verb } from '../VerbsComponent'
+import { SubjectsContent, CurrentSubjects, Subjects, Subject } from '../SubjectsComponent'
+import { WheresContent, CurrentWheres, Wheres, EmptyWhere, Where } from '../WheresComponent'
+import { WhensContent, CurrentWhens, Whens, EmptyWhen, When } from '../WhensComponent'
 
 
-export function AboutContent() {
+export function HomeContent() {
     const [sentence, setSentence] = useState([]);
     const [currentConjugation, setCurrentConjugation] = useState({});
-    const [currentVerb, setCurrentVerb] = useState(Verb);
-    const [currentSubject, setCurrentSubject] = useState(Subject);
-    const [currentWhere, setCurrentWhere] = useState(Where);
-    const [currentWhen, setCurrentWhen] = useState(When);
+    const [currentVerb, setCurrentVerb] = useState<Verb>();
+    const [currentSubject, setCurrentSubject] = useState<Subject>();
+    const [currentWhere, setCurrentWhere] = useState<Where>();
+    const [currentWhen, setCurrentWhen] = useState<When>();
+    const [state, handlers] = useAccordionState({ total: 1, initialItem: -1 });
+
     const updateSentence = () => {
         let conjugationName = CurrentConjugations[Math.floor(Math.random() * CurrentConjugations.length)];
         let conjugation = Conjugations.find(c => c.value === conjugationName);
@@ -45,7 +51,11 @@ export function AboutContent() {
         setCurrentWhen(when);
 
         let sentencePair = ["unset", "unset"];
-        console.log(`${conjugation.value} ${subject.spanish} ${verb.spanish}`);
+
+        if (!conjugation || !subject || !verb) {
+            return;
+        }
+
         switch(conjugation.value) {
         case "o":
             sentencePair = verb.o(subject.spanish);
@@ -71,8 +81,30 @@ export function AboutContent() {
         sentencePair[0] = `${sentencePair[0]} ${where.spanish} ${when.spanish}`;
         sentencePair[1] = `${sentencePair[1]} ${where.english} ${when.english}`;
         setSentence(sentencePair);
+
+        handlers.toggle(!state);
     };
 
+    const accordion = <Accordion
+                          state={state}
+                          onChange={handlers.setState}
+                      >
+                          <Accordion.Item
+                              label="Show Spanish"
+                          >
+                              { sentence[0] }
+                          </Accordion.Item>
+                      </Accordion>
+
+    const nextStep = () => {
+        if (accordion.props.state[0] === true) {
+            updateSentence();
+        } else {
+            handlers.toggle(0);
+        }
+    }
+
+    useHotkeys([['N', () => nextStep()]]);
 
     return (
         <Container>
@@ -82,6 +114,7 @@ export function AboutContent() {
             <VerbsContent />
             <WheresContent />
             <WhensContent />
+            <Divider />
             <Button
                 onClick={updateSentence}>
                 Next Sentence
@@ -91,17 +124,7 @@ export function AboutContent() {
             >
                 {sentence[1]}
             </Text>
-            <Spoiler
-                maxHeight={5}
-                showLabel="Show Spanish"
-                hideLabel="Hide Spanish"
-            >
-            <Text
-                size="xl"
-            >
-                {sentence[0]}
-            </Text>
-            </Spoiler>
+            { accordion }
         </Container>
-    )
+    );
 }
