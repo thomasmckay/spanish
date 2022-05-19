@@ -17,11 +17,11 @@ export const Conjugations = [
 export var CurrentConjugations;
 
 export function ConjugationsContent() {
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState(CurrentConjugations);
 
     useEffect(() => {
-        console.log(`???? conjugations=${value}`);
         CurrentConjugations = value;
+        console.log(`ConjugationsComponent: CurrentConjugations=${CurrentConjugations}`);
     });
 
     return (

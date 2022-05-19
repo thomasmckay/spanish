@@ -42,10 +42,11 @@ export const EmptyWhen = new When("", "", "");
 export var CurrentWhens;
 
 export function WhensContent() {
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState(CurrentWhens);
 
     useEffect(() => {
         CurrentWhens = value;
+        console.log(`WhensComponent: CurrentWhens=${CurrentWhens}`);
     }, [value]);
 
     return (
