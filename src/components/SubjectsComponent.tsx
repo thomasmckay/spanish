@@ -26,11 +26,11 @@ export const Subjects = [
 export var CurrentSubjects;
 
 export function SubjectsContent() {
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState(CurrentSubjects);
 
     useEffect(() => {
-        console.log(`???? subjects=${value}`);
         CurrentSubjects = value;
+        console.log(`SubjectsComponent: CurrentSubjects=${CurrentSubjects}`);
     }, [value]);
 
     return (

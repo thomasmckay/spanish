@@ -19,10 +19,11 @@ export const EmptyWhere = new Where("", "");
 export var CurrentWheres;
 
 export function WheresContent() {
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState(CurrentWheres);
 
     useEffect(() => {
         CurrentWheres = value;
+        console.log(`WheresComponent: CurrentWheres=${CurrentWheres}`);
     }, [value]);
 
     return (
