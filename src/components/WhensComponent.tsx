@@ -4,6 +4,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 class When {
+    spanish: string;
+    english: string;
+    when: string;
+    
     constructor(spanish, english, when) {
         this.spanish = spanish;
         this.english = english;
