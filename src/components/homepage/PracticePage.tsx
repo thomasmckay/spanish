@@ -23,10 +23,6 @@ export function PracticePage() {
     const [state, handlers] = useAccordionState({ total: 1, initialItem: -1 });
 
     const updateSentence = () => {
-        console.log(`???? CurrentConjugations=${CurrentConjugations}  ${Conjugations.length}`);
-        console.log(`???? CurrentVerbs=${CurrentVerbs}  ${Verbs.length}`);
-        console.log(`???? CurrentSubjects=${CurrentSubjects}  ${Subjects.length}`);
-
         let conjugationName = CurrentConjugations[Math.floor(Math.random() * CurrentConjugations.length)];
         let conjugation = Conjugations.find(c => c.value === conjugationName);
         setCurrentConjugation(conjugation);
@@ -38,7 +34,7 @@ export function PracticePage() {
         setCurrentSubject(subject);
 
         let where;
-        if (CurrentWheres.length == 0) {
+        if (!CurrentWheres || CurrentWheres.length == 0) {
             where = EmptyWhere;
         } else {
             let whereName = CurrentWheres[Math.floor(Math.random() * CurrentWheres.length)];
@@ -47,7 +43,7 @@ export function PracticePage() {
         setCurrentWhere(where);
 
         let when;
-        if (CurrentWhens.length == 0) {
+        if (!CurrentWhens || CurrentWhens.length == 0) {
             when = EmptyWhen;
         } else {
             let whenName = CurrentWhens[Math.floor(Math.random() * CurrentWhens.length)];
@@ -64,25 +60,25 @@ export function PracticePage() {
 
         switch(conjugation.value) {
         case "o":
-            sentencePair = verb.o(subject.spanish);
+            sentencePair = verb.o({ who: subject.spanish });
             break;
         case "estoy_ando":
-            sentencePair = verb.estoy_ando(subject.spanish);
+            sentencePair = verb.estoy_ando({ who: subject.spanish });
             break;
         case "he_estado_ando":
-            sentencePair = verb.he_estado_ando(subject.spanish);
+            sentencePair = verb.he_estado_ando({ who: subject.spanish });
             break;
         case "estaba_ando":
-            sentencePair = verb.estaba_ando(subject.spanish);
+            sentencePair = verb.estaba_ando({ who: subject.spanish });
             break;
         case "estare_ando":
-            sentencePair = verb.estare_ando(subject.spanish);
+            sentencePair = verb.estare_ando({ who: subject.spanish });
             break;
         case "aba":
-            sentencePair = verb.aba(subject.spanish);
+            sentencePair = verb.aba({ who: subject.spanish });
             break;
         case "e":
-            sentencePair = verb.e(subject.spanish);
+            sentencePair = verb.e({ who: subject.spanish });
             break;
         default:
             sentencePair = [

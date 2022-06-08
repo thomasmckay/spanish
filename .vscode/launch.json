@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "npm run develop",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "develop"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node",
+            "runtimeVersion": "16.14.2",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "chrome localhost:8000",
+            "url": "http://localhost:8000",
+            "webRoot": "${workspaceFolder}"
+        },
+    ]
+}
