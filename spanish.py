@@ -39,7 +39,7 @@ def practice_all(group="yes", randomize="no"):
 
     subject = (
         ("I", "yo"),
-        ("YOU", "tu"),
+        ("YOU", "tú"),
         ("SHE", "ella"),
         ("HE", "él"),
         ("WE", "nosotros"),
@@ -164,7 +164,7 @@ def practice_he_ado(action="random"):
 def practice_estare(action="random"):
     nouns = (
         ("I", "yo", "é"),
-        ("YOU", "tu", "ás"),
+        ("YOU", "tú", "ás"),
         ("SHE", "ella", "á"),
         ("HE", "él", "á"),
         ("WE", "nosotros", "emos"),
@@ -259,7 +259,7 @@ def practice_estare(action="random"):
 def practice_estaba(action="random"):
     verbs = (
         ("I WAS", "yo estaba"),
-        ("YOU WERE", "tu estabas"),
+        ("YOU WERE", "tú estabas"),
         ("SHE WAS", "ella estaba"),
         ("WE WERE", "nosotros estabamos"),
         ("YOU GUYS WERE", "vosotros estabais"),
@@ -351,7 +351,7 @@ def practice_estaba(action="random"):
 def practice_estoy(action="random"):
     verbs = (
         ("I AM", "yo estoy"),
-        ("YOU ARE", "tu estas"),
+        ("YOU ARE", "tú estas"),
         ("HE IS", "él está"),
         ("SHE IS", "ella está"),
         ("WE ARE", "nosotros estamos"),

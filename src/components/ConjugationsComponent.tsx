@@ -4,14 +4,27 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 
+export class Conjugation {
+    value: string;
+    label: string;
+    group: string;
+
+  constructor(value: string, label: string, group: string) {
+    this.value = value;
+    this.label = label;
+    this.group = group;
+  }
+}
+
+
 export const Conjugations = [
-    {value: "o", label: "I walk", group: "now"},
-    {value: "estoy_ando", label: "I am walking", group: "now"},
-    {value: "he_estado_ando", label: "I have been walking", group: "past"},
-    {value: "estaba_ando", label: "I was walking (imperfect)", group: "past"},
-    {value: "estare_ando", label: "I will be walking", group: "future"},
-    {value: "aba", label: "I walked (imperfect)", group: "past"},
-    {value: "e", label: "I walked (preterite)", group: "past"},
+    new Conjugation("o", "I walk", "now"),
+    new Conjugation("estoy_ando", "I am walking", "now"),
+    new Conjugation("he_estado_ando", "I have been walking", "past"),
+    new Conjugation("estaba_ando", "I was walking (imperfect)", "past"),
+    new Conjugation("estare_ando", "I will be walking", "future"),
+    new Conjugation("aba", "I walked (imperfect)", "past"),
+    new Conjugation("e", "I walked (preterite)", "past"),
 ];
 
 export var CurrentConjugations;
@@ -21,7 +34,6 @@ export function ConjugationsContent() {
 
     useEffect(() => {
         CurrentConjugations = value;
-        console.log(`ConjugationsComponent: CurrentConjugations=${CurrentConjugations}`);
     });
 
     return (

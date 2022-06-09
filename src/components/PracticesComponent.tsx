@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 
 
 export const Practices = [
-    {label: "Who What Where When Sentences", value: 1},
-    {label: "Conjugation Paragraph", value: 2},
+    {label: "Who What Where When Sentences", value: "Sentence"},
+    {label: "Conjugation Paragraph", value: "Paragraph"},
 ];
 
 export var CurrentPractices;
@@ -16,7 +16,6 @@ export function PracticesContent() {
 
     useEffect(() => {
         CurrentPractices = value;
-        console.log(`PracticesComponent: CurrentPractices=${CurrentPractices}`);
     }, [value]);
 
     return (
@@ -29,7 +28,7 @@ export function PracticesContent() {
                 onChange={setValue}
                 clearable
                 clearButtonLabel="Clear selection"
-                maxSelectedValues="1"
+                maxSelectedValues={ 1 }
             />
         </Container>
     )

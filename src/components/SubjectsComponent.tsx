@@ -30,7 +30,6 @@ export function SubjectsContent() {
 
     useEffect(() => {
         CurrentSubjects = value;
-        console.log(`SubjectsComponent: CurrentSubjects=${CurrentSubjects}`);
     }, [value]);
 
     return (

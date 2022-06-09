@@ -16,7 +16,7 @@ enum WhoNouns {
 };
 
 
-class Verb {
+export class Verb {
     spanish: string;
     english: string;
     english_ing: string;
@@ -103,12 +103,12 @@ class Verb {
         } else {
             this.spanish_o = {
                 yo: `${base}o`,
-                tu: `${base}as`,
-                el: `${base}a`,
-                ella: `${base}a`,
-                nosotros: `${base}amos`,
-                vosotros: `${base}áis`,
-                ellos: `${base}an`,
+                tu: `${base}es`,
+                el: `${base}e`,
+                ella: `${base}e`,
+                nosotros: `${base}imos`,
+                vosotros: `${base}ís`,
+                ellos: `${base}en`,
             };
         }
 
@@ -409,6 +409,8 @@ export const Verbs = [
 export var CurrentVerbs;
 
 export function VerbsContent() {
+    const [currentVerbs, setCurrentVerbs] = useState(CurrentVerbs);
+
     const initialValues: TransferListData = [
         Verbs.map(v => {
                    return {
@@ -422,7 +424,6 @@ export function VerbsContent() {
 
     useEffect(() => {
         CurrentVerbs = value[1];
-        console.log(`VerbsComponent: CurrentVerbs=${CurrentVerbs}`);
     });
 
     return (

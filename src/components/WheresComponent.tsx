@@ -3,10 +3,10 @@ import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-class Where {
+export class Where {
     spanish: string;
     english: string;
-    
+
     constructor(spanish, english) {
         this.spanish = spanish;
         this.english = english;
@@ -26,7 +26,6 @@ export function WheresContent() {
 
     useEffect(() => {
         CurrentWheres = value;
-        console.log(`WheresComponent: CurrentWheres=${CurrentWheres}`);
     }, [value]);
 
     return (

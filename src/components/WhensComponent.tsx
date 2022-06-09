@@ -3,11 +3,11 @@ import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-class When {
+export class When {
     spanish: string;
     english: string;
     when: string;
-    
+
     constructor(spanish, english, when) {
         this.spanish = spanish;
         this.english = english;
@@ -50,7 +50,6 @@ export function WhensContent() {
 
     useEffect(() => {
         CurrentWhens = value;
-        console.log(`WhensComponent: CurrentWhens=${CurrentWhens}`);
     }, [value]);
 
     return (

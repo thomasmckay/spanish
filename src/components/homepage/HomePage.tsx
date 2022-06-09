@@ -14,18 +14,7 @@ export function HomeContent() {
 
     return (
         <Container>
-            <Tabs>
-                <Tabs.Tab
-                    label="Verbs"
-                >
-                    <VerbPage />
-                </Tabs.Tab>
-                <Tabs.Tab
-                    label="Practice"
-                >
                     <PracticePage />
-                </Tabs.Tab>
-            </Tabs>
         </Container>
     );
 }

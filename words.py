@@ -90,7 +90,7 @@ class Verb:
         self.is_spanish = True
         return self
 
-    whos = ("yo", "tu", "el", "ella", "nosotros", "vosotros", "ellos")
+    whos = ("yo", "tú", "el", "ella", "nosotros", "vosotros", "ellos")
 
     YO = 0
     TU = 1
@@ -149,7 +149,7 @@ class Verb:
                 case "yo":
                     return f"yo {self.future[self.YO]}"
                 case "tu":
-                    return f"tu {self.future[self.TU]}"
+                    return f"tú {self.future[self.TU]}"
                 case "el":
                     return f"él {self.future[self.EL]}"
                 case "ella":
@@ -190,7 +190,7 @@ class Verb:
                 case "yo":
                     return f"yo estaré {self.gerund}"
                 case "tu":
-                    return f"tu estarás {self.gerund}"
+                    return f"tú estarás {self.gerund}"
                 case "el":
                     return f"él estará {self.gerund}"
                 case "ella":
@@ -230,7 +230,7 @@ class Verb:
                 case "yo":
                     return f"yo estaba {self.gerund}"
                 case "tu":
-                    return f"yo estabas {self.gerund}"
+                    return f"tú estabas {self.gerund}"
                 case "el":
                     return f"él estaba {self.gerund}"
                 case "ella":
@@ -271,7 +271,7 @@ class Verb:
                 case "yo":
                     return f"yo {self.past[self.YO]}"
                 case "tu":
-                    return f"tu {self.past[self.TU]}"
+                    return f"tú {self.past[self.TU]}"
                 case "el":
                     return f"él {self.past[self.EL]}"
                 case "ella":
@@ -312,7 +312,7 @@ class Verb:
                 case "yo":
                     return f"yo he estado {self.gerund}"
                 case "tu":
-                    return f"tu has estado {self.gerund}"
+                    return f"tú has estado {self.gerund}"
                 case "el":
                     return f"él ha estado {self.gerund}"
                 case "ella":
@@ -353,7 +353,7 @@ class Verb:
                 case "yo":
                     return f"yo he {self.past_participle}"
                 case "tu":
-                    return f"tu has {self.past_participle}"
+                    return f"tú has {self.past_participle}"
                 case "el":
                     return f"él ha {self.past_participle}"
                 case "ella":
@@ -421,7 +421,7 @@ future_whens = [
     When("tarde en la noche", "late in the night"),
 ]
 
-whos = ("yo", "tu", "el", "ella", "nosotros", "vosotros", "ellos")
+whos = ("yo", "tú", "el", "ella", "nosotros", "vosotros", "ellos")
 
 
 categories = ("will", "will_be", "was_be", "have_been_be", "have_past")

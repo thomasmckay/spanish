@@ -17,9 +17,6 @@ export function VerbGroupsContent() {
     const [value, setValue] = useState();
 
     useEffect(() => {
-        console.log(`VerbGroupsComponent: CurrentVerbs=${CurrentVerbs}`);
-        console.log(`VerbGroupsComponent: useEffect=${value}`);
-
         if (!value) {
             return;
         }
