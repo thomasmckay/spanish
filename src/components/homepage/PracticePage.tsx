@@ -38,7 +38,8 @@ export function PracticePage() {
         let subjectName = CurrentSubjects[Math.floor(Math.random() * CurrentSubjects.length)];
         let subject = Subjects.find(s => s.spanish === subjectName);
         setCurrentSubject(subject);
-        setCurrentParagraph(CurrentParagraphs ? CurrentParagraphs[0] : undefined)
+        setCurrentParagraph(CurrentParagraphs ? CurrentParagraphs[0] : undefined);
+        let currentVerbs = CurrentVerbs.map(v => v.spanish);
 
         let where;
         if (!CurrentWheres || CurrentWheres.length == 0) {
@@ -77,7 +78,8 @@ export function PracticePage() {
             return ["unset", "unset"];
         }
 
-        let verbs = Verbs.filter(v => v.spanish === CurrentVerbs[0].value);
+        // let verbs = Verbs.filter(v => v.spanish === CurrentVerbs[0].value);
+        let verbs = Verbs.filter(v => CurrentVerbs.find(cv => v.spanish === cv.value))
         setSentence(CurrentParagraph.sentences(verbs, currentSubject));
 
         handlers.toggle(!state);
