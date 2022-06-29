@@ -21,7 +21,9 @@ export class Paragraph {
     }
 
     sentences(verbs: Verb[], who: Subject) {
-        // assert verbs length
+        if (verbs.length < 4) {
+            return ["wrong number of verbs", "wrong number of verbs"]
+        }
 
         let spanish = this.fillTemplate(this.spanish, {who: who, verbs: verbs});
         let english = this.fillTemplate(this.english, {who: who, verbs: verbs});
