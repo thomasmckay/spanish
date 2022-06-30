@@ -406,10 +406,10 @@ export const Verbs = [
         }),
 ];
 
-export var CurrentVerbs;
+export var CurrentVerbs = [];
 
 export function VerbsContent() {
-    const [currentVerbs, setCurrentVerbs] = useState(CurrentVerbs);
+    const [currentVerbs, setCurrentVerbs] = useState([]);
 
     const initialValues: TransferListData = [
         Verbs.map(v => {
@@ -418,13 +418,13 @@ export function VerbsContent() {
                        value: v.spanish,
                    }
                }),
-        CurrentVerbs || [],
+        currentVerbs,
     ];
     const [value, setValue] = useState<TransferListData>(initialValues);
 
     useEffect(() => {
         CurrentVerbs = value[1];
-    });
+    }, value);
 
     return (
         <Container>
