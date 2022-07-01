@@ -2,18 +2,20 @@ import { Container } from '@mantine/core';
 import { MultiSelect } from '@mantine/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Verb } from '../components/VerbsComponent'
-import { Subject } from '../components/SubjectsComponent'
+import { Verb, Verbs } from '../components/VerbsComponent'
+import { Subject, Subjects } from '../components/SubjectsComponent'
 
 export class Paragraph {
     spanish: string;
     english: string;
+    defaultVerbs: string[];
 
     who: Subject;
 
-    constructor(spanish, english) {
+    constructor({spanish, english, defaultVerbs}: { spanish: string; english: string; defaultVerbs: string[]}) {
         this.spanish = spanish;
         this.english = english;
+        this.defaultVerbs = defaultVerbs;
     }
 
     fillTemplate(templateString, templateVars){
@@ -21,8 +23,13 @@ export class Paragraph {
     }
 
     sentences(verbs: Verb[], who: Subject) {
-        if (verbs.length < 4) {
+        if (verbs.length == 0) {
+            verbs = Verbs.filter(v => this.defaultVerbs.indexOf(v.spanish) != -1)
+        } else if (verbs.length < this.defaultVerbs.length) {
             return ["wrong number of verbs", "wrong number of verbs"]
+        }
+        if (!who) {
+            who = Subjects[0];
         }
 
         let spanish = this.fillTemplate(this.spanish, {who: who, verbs: verbs});
@@ -32,10 +39,17 @@ export class Paragraph {
 }
 
 export const Paragraphs = [
-    new Paragraph(
-        "Bueno, ${this.verbs[0].he_estado_ando({ who: this.who.spanish })[0]} en casa esta mañana, \n estaba caminando en el parque ayer \n pero hoy estoy estudiando mucho en la cama \n y mañana estaré visitando los museos en la ciudad.",
-        "Well, ${this.verbs[0].he_estado_ando({ who: this.who.spanish })[1]} at home this morning, \n i was walking in the park yesterday, \n but today i am studying a lot in bed and \n tomorrow i will be visiting the museums in the city."
-    ),
+    new Paragraph({
+        defaultVerbs: ["descansar", "caminar", "estudiar", "visitar"],
+        spanish: "Bueno, ${this.verbs[0].he_estado_ando({ who: this.who.spanish })[0]} en casa esta mañana, \n " +
+        "${this.verbs[1].estaba_ando({ who: this.who.spanish })[0]} en el parque ayer \n " +
+        "pero hoy ${this.verbs[2].estoy_ando({ who: this.who.spanish })[0]} mucho en la cama \n " +
+        "y mañana ${this.verbs[3].estare_ando({ who: this.who.spanish })[0]} los museos en la ciudad.",
+        english: "Well, ${this.verbs[0].he_estado_ando({ who: this.who.spanish })[1]} at home this morning, \n " +
+        "${this.verbs[1].estaba_ando({ who: this.who.spanish })[1]} in the park yesterday, \n " +
+        "but today ${this.verbs[2].estoy_ando({ who: this.who.spanish })[1]} a lot in bed and \n " +
+        "tomorrow ${this.verbs[3].estare_ando({ who: this.who.spanish })[1]} the museums in the city."
+    }),
 ];
 
 

@@ -29,17 +29,22 @@ export function PracticePage() {
     const updatePractice = () => {
         let practice = CurrentPractices ? CurrentPractices[0] : "<Select Practice Type>";
         setCurrentPractice(practice);
-        let conjugationName = CurrentConjugations[Math.floor(Math.random() * CurrentConjugations.length)];
-        let conjugation = Conjugations.find(c => c.value === conjugationName);
-        setCurrentConjugation(conjugation);
-        let randomVerb = CurrentVerbs[Math.floor(Math.random() * CurrentVerbs.length)];
-        let verb = Verbs.find(v => v.spanish === randomVerb.value);
-        setCurrentVerb(verb);
-        let subjectName = CurrentSubjects[Math.floor(Math.random() * CurrentSubjects.length)];
-        let subject = Subjects.find(s => s.spanish === subjectName);
-        setCurrentSubject(subject);
+        if (CurrentConjugations && CurrentConjugations.length > 0) {
+            let conjugationName = CurrentConjugations[Math.floor(Math.random() * CurrentConjugations.length)];
+            let conjugation = Conjugations.find(c => c.value === conjugationName);
+            setCurrentConjugation(conjugation);
+        }
+        if (CurrentVerbs && CurrentVerbs.length > 0) {
+            let randomVerb = CurrentVerbs[Math.floor(Math.random() * CurrentVerbs.length)];
+            let verb = Verbs.find(v => v.spanish === randomVerb.value);
+            setCurrentVerb(verb);
+        }
+        if (CurrentSubjects && CurrentSubjects.length > 0) {
+            let subjectName = CurrentSubjects[Math.floor(Math.random() * CurrentSubjects.length)];
+            let subject = Subjects.find(s => s.spanish === subjectName);
+            setCurrentSubject(subject);
+        }
         setCurrentParagraph(CurrentParagraphs ? CurrentParagraphs[0] : undefined);
-        let currentVerbs = CurrentVerbs.map(v => v.spanish);
 
         let where;
         if (!CurrentWheres || CurrentWheres.length == 0) {
@@ -69,12 +74,6 @@ export function PracticePage() {
 
     const updateParagraph = () => {
         if (!CurrentParagraph) {
-            return ["unset", "unset"];
-        }
-        if (!CurrentVerbs || CurrentVerbs.length == 0) {
-            return ["unset", "unset"];
-        }
-        if (!currentSubject) {
             return ["unset", "unset"];
         }
 
