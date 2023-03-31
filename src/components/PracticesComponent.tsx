@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 export const Practices = [
     {label: "Who What Where When Sentences", value: "Sentence"},
-    {label: "Conjugation Paragraph", value: "Paragraph"},
+    {label: "Conjugation Paragraphs", value: "Paragraph"},
 ];
 
 export var CurrentPractices;

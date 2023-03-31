@@ -264,7 +264,7 @@ export class Verb {
 
     estaba_ando({ who }: { who: string; }): string[] {
         return [
-                `${this.spanish_who[who]} ${this.spanish_estaba[who]} estado ${this.spanish_ando}`,
+                `${this.spanish_who[who]} ${this.spanish_estaba[who]} ${this.spanish_ando}`,
                 `${this.english_who[who]} ${this.english_estaba[who]} ${this.english_ing}`,
         ];
     }

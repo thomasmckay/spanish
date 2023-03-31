@@ -68,9 +68,10 @@ export function PracticePage() {
             updateParagraph();
         } else if (currentPractice === "Sentence"){
             updateSentence();
+        } else if (currentPractice === "Practice Sentence"){
+            updatePractice();
         }
     }
-
 
     const updateParagraph = () => {
         if (!CurrentParagraph) {
